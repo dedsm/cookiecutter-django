@@ -1,0 +1,30 @@
+# Django Rest Framework
+djangorestframework
+
+# Configuration
+django-environ
+django-secure
+
+# Images
+Pillow
+
+# Python-PostgreSQL Database Adapter
+psycopg2
+
+# Unicode slugification
+unicode-slugify
+django-autoslug
+
+# Time zones support
+pytz
+
+{% if cookiecutter.use_redis == "y" %}
+# Redis support
+django-redis==4.3.0
+redis>=2.10.0
+{% endif %}
+
+{% if cookiecutter.use_celery == "y" %}
+# Celery
+celery==3.1.19
+{% endif %}

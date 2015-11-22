@@ -1,0 +1,28 @@
+# Pro-tip: Try not to put anything here. There should be no dependency in
+#	production that isn't in development.
+-r req_django.txt
+-r req_base.txt
+
+psycopg2
+
+# WSGI Handler
+gevent
+gunicorn
+
+{% if cookiecutter.use_sentry == "y" -%}
+# Raven is the Sentry client
+# --------------------------
+raven
+{%- endif %}
+
+{% if cookiecutter.use_newrelic == "y" -%}
+# Newrelic agent for performance monitoring
+# -----------------------------------------
+newrelic
+{%- endif %}
+
+{% if cookiecutter.use_opbeat == "y" -%}
+# Opbeat agent for performance monitoring
+# -----------------------------------------
+opbeat
+{%- endif %}

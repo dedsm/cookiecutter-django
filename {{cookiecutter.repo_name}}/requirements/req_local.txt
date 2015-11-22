@@ -1,0 +1,17 @@
+# Local development dependencies go here
+-r req_base.txt
+-r req_django.txt
+
+Sphinx
+
+# Fun extensions to use while developing
+django-extensions
+
+# improved REPL
+ipdb
+
+# Query Inspector
+django-queryinspect
+
+# Python Import sorting
+isort

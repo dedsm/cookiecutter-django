@@ -31,7 +31,8 @@ if [ -z "$VIRTUAL_ENV" ]; then
     exit 1;
 else
 
-    pip install -r requirements/local.txt
-    pip install -r requirements/test.txt
+    pip install --upgrade pip
+    pip install -r requirements/req_local.txt
+    pip install -r requirements/req_test.txt
     pip install -r requirements.txt
 fi
