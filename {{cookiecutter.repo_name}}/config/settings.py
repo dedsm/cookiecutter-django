@@ -12,10 +12,21 @@ from __future__ import absolute_import, unicode_literals
 
 import environ
 
-ROOT_DIR = environ.Path(__file__) - 3  # (/a/b/myfile.py - 3 = /)
+ROOT_DIR = environ.Path(__file__) - 2
 APPS_DIR = ROOT_DIR.path('{{ cookiecutter.repo_name }}')
+ENV_PATH = str(ROOT_DIR.path('.env'))
 
 env = environ.Env()
+env.read_env(ENV_PATH)
+
+# DEBUG
+# ------------------------------------------------------------------------------
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
+DEBUG = env.bool("DJANGO_DEBUG", False)
+
+SECRET_KEY = env("DJANGO_SECRET_KEY", default=None)
+if DEBUG:
+    SECRET_KEY = "too secret"
 
 # APP CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -34,12 +45,7 @@ DJANGO_APPS = (
     # Admin
     'django.contrib.admin',
 )
-THIRD_PARTY_APPS = (
-    'crispy_forms',  # Form layouts
-    'allauth',  # registration
-    'allauth.account',  # registration
-    'allauth.socialaccount',  # registration
-)
+THIRD_PARTY_APPS = ()
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
@@ -68,11 +74,6 @@ MIGRATION_MODULES = {
     'sites': '{{ cookiecutter.repo_name }}.contrib.sites.migrations'
 }
 
-# DEBUG
-# ------------------------------------------------------------------------------
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = env.bool("DJANGO_DEBUG", False)
-
 # FIXTURE CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-FIXTURE_DIRS
@@ -99,7 +100,7 @@ MANAGERS = ADMINS
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
     # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
-    'default': env.db("DATABASE_URL", default="postgres://{% if cookiecutter.windows == 'y' %}localhost{% endif %}/{{cookiecutter.repo_name}}"),
+    'default': env.db("DATABASE_URL", default="postgres:///{{cookiecutter.repo_name}}"),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
@@ -163,9 +164,6 @@ TEMPLATES = [
     },
 ]
 
-# See: http://django-crispy-forms.readthedocs.org/en/latest/install.html#template-packs
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
-
 # STATIC FILE CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
@@ -204,7 +202,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # ------------------------------------------------------------------------------
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
 # Some really nice defaults

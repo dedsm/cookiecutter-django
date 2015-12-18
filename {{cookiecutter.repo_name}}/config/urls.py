@@ -15,10 +15,6 @@ urlpatterns = [
     # Django Admin, use {% raw %}{% url 'admin:index' %}{% endraw %}
     url(settings.ADMIN_URL, include(admin.site.urls)),
 
-    # User management
-    url(r'^users/', include("{{ cookiecutter.repo_name }}.users.urls", namespace="users")),
-    url(r'^accounts/', include('allauth.urls')),
-
     # Your stuff: custom urls includes go here
 
 

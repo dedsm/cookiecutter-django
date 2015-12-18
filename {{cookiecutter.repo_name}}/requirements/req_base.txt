@@ -28,3 +28,8 @@ redis>=2.10.0
 # Celery
 celery==3.1.19
 {% endif %}
+
+{% if cookiecutter.use_whitenoise == "y" %}
+# static file serving
+whitenoise
+{% endif %}

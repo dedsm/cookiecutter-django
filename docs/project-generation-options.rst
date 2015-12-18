@@ -42,9 +42,6 @@ use_mailhog [n]
 use_sentry [n]
     Whether to use Sentry_ to log errors from your project.
 
-windows [n]
-    Whether you'll be developing on Windows.
-
 use_python2 [n]
     By default, the Python code generated will be for Python 3.x. But if you
     answer `y` here, it will be legacy Python 2.7 code.

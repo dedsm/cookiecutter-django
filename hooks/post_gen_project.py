@@ -73,14 +73,6 @@ def set_secret_key(setting_file_location):
 
 def make_secret_key(project_directory):
     """Generates and saves random secret key"""
-    # Determine the local_setting_file_location
-    local_setting = os.path.join(
-        project_directory,
-        'config/settings/local.py'
-    )
-
-    # local.py settings file
-    set_secret_key(local_setting)
 
     env_file = os.path.join(
         project_directory,

@@ -3,8 +3,6 @@
 -r req_django.txt
 -r req_base.txt
 
-psycopg2
-
 # WSGI Handler
 gevent
 gunicorn
